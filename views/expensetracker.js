@@ -38,6 +38,7 @@ async function login(e){
 
        const response =  await axios.post('http://localhost:4000/user/login',loginDetails)
             if(response.status = 201){alert(response.data.message)
+                window.location.href="/views/index.html"
     }
 else{
     throw new Error('Failed to Login')
@@ -47,3 +48,55 @@ else{
         document.body.innerHTML = `<div style="color:red">${err.message}</div>`
     }
 }
+
+function addNewExpense(e){
+    e.preventDefault();
+
+    const expenseDetails = {
+        expenseamount : e.target.expenseamount.value,
+        description : e.target.description.value,
+        category : e.target.category.value
+    }
+    console.log(expenseDetails)
+    axios.post('http://localhost:4000/expense/addexpense',expenseDetails)
+    .then((response)=>{
+            addNewExpensetoUI(response.data.expense);
+    })
+    .catch(err=>console.log(err))
+}
+
+window.addEventListener('DOMContentLoaded',()=>{
+    axios.get('http://localhost:4000/expense/getexpenses')
+    .then(response =>{
+        response.data.expenses.forEach(expense=>{
+            addNewExpensetoUI(expense)
+        })
+    })
+    .catch(err=>console.log(err))
+})
+
+function addNewExpensetoUI(expense){
+    const parentElement = document.getElementById('listOfExpenses');
+    const expenseElemId = `expense-${expense.id}`;
+    parentElement.innerHTML += `
+    <li id=${expenseElemId}>
+        ${expense.expenseamount} - ${expense.category} - ${expense.description}
+        <button onclick='deleteExpense(event, ${expense.id})'>
+            Delete Expense
+        </button>
+    </li>`
+}
+
+function deleteExpense(e,expenseid){
+    axios.delete(`http://localhost:4000/expense/deleteexpense/${expenseid}`)
+    .then(()=>{
+        removeExpensefromUI(expenseid);
+    })
+    .catch(err=>console.log(err))
+}
+
+function removeExpensefromUI(expenseid){
+    const expenseElemId = `expense - ${expenseid}`;
+    document.getElementById(expenseElemId).remove();
+}
+
