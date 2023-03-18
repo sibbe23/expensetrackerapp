@@ -1,5 +1,6 @@
 const User = require('../models/users')
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 function stringvalidator(string){
     if(string == undefined || string.length === 0)
@@ -20,13 +21,14 @@ const signup = async(req,res)=>{
             console.log(err)
             await User.create({name,email,password:hash})
             res.status(201).json({message:'Success'})
-        })
-        
- }
-
-catch(err){
+        })     
+    }catch(err){
         res.status(500).json(err);
     }
+}
+
+function generateAccessToken(id,name){
+    return jwt.sign({userId :id,name:name},'secretkey')
 }
 
 const login = async(req,res)=>{
@@ -40,9 +42,9 @@ const login = async(req,res)=>{
             if(user.length > 0){
                 bcrypt.compare(password,user[0].password , (err , result)=>{
                     if(err){
-                        throw new Error;
-                    } else if(result === true){
-                        res.status(200).json({success:true,message:"Login success"})
+                        throw new Error('Something went wrong here');
+                    } if(result === true){
+                      return  res.status(200).json({success:true,message:"Login success",token:generateAccessToken(user[0].id,user[0].name)})
                     }else{
                         return res.status(400).json({success:false,message:'Password is Incorrect'})
                     }})}
