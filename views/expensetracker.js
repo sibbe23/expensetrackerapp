@@ -40,6 +40,7 @@ async function login(e){
             if(response.status = 201){alert(response.data.message)
                 console.log(response.data)
                 localStorage.setItem('token',response.data.token)
+                localStorage.setItem('userDetails', JSON.stringify(response.data.user))
                 window.location.href="/views/index.html"
     }
 else{
@@ -174,4 +175,29 @@ function showLeaderboard(){
     }
     document.getElementById("message").appendChild(inputElement);
 
+}
+
+function forgotpassword() {
+    window.location.href = "/views/forgotpassword.html"
+}
+
+function forgot(e) {
+    e.preventDefault();
+    console.log(e.target.name);
+    const form = new FormData(e.target);
+
+    const userDetails = {
+        email: form.get("email"),
+
+    }
+    console.log(userDetails)
+    axios.post('http://localhost:4000/password/forgotpassword',userDetails).then(response => {
+        if(response.status === 202){
+            document.body.innerHTML += '<div style="color:red;">Mail Successfuly sent <div>'
+        } else {
+            throw new Error('Something went wrong!!!')
+        }
+    }).catch(err => {
+        document.body.innerHTML += `<div style="color:red;">${err} <div>`;
+    })
 }
