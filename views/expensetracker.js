@@ -1,5 +1,3 @@
-
-
 async function signup(e){
     try{
     e.preventDefault();
@@ -8,7 +6,7 @@ async function signup(e){
         email:e.target.email.value,
         password:e.target.password.value
     }
-
+    
     console.log(userDetails)
 
    const response = await axios.post('http://localhost:4000/user/signup',userDetails)
@@ -23,15 +21,15 @@ async function signup(e){
     document.body.innerHTML +=`<div style="color:red">${err.message}</div>`;
     }
 }
-
 async function login(e){
     try{
         e.preventDefault();
         console.log(e.target.name);
+        const form = new FormData(e.target)
         
         const loginDetails ={
-            email:e.target.email.value,
-            password:e.target.password.value
+            email:form.get('email'),
+            password:form.get('password')
         }
 
         console.log(loginDetails)
@@ -40,6 +38,7 @@ async function login(e){
             if(response.status = 201){alert(response.data.message)
                 console.log(response.data)
                 localStorage.setItem('token',response.data.token)
+                localStorage.setItem('userDetails',JSON.stringify(response.data.user))
                 window.location.href="/views/index.html"
     }
 else{
@@ -50,7 +49,6 @@ else{
         document.body.innerHTML = `<div style="color:red">${err.message}</div>`
     }
 }
-
 function addNewExpense(e){
     e.preventDefault();
 
@@ -80,7 +78,6 @@ function parseJwt (token) {
 
     return JSON.parse(jsonPayload);
 }
-
 window.addEventListener('DOMContentLoaded',()=>{
     const token = localStorage.getItem('token')
     const decodeToken = parseJwt(token)
@@ -98,7 +95,6 @@ window.addEventListener('DOMContentLoaded',()=>{
     })
     .catch(err=>console.log(err))
 })
-
 function addNewExpensetoUI(expense){
     const parentElement = document.getElementById('listOfExpenses');
     const expenseElemId = `expense-${expense.id}`;
@@ -110,7 +106,6 @@ function addNewExpensetoUI(expense){
             </button>
         </li>`
 }
-
 function deleteExpense(e,expenseid){
     const token = localStorage.getItem('token')
     axios.delete(`http://localhost:4000/expense/deleteexpense/${expenseid}`,{headers:{'Authorization':token}})
@@ -119,12 +114,10 @@ function deleteExpense(e,expenseid){
     })
     .catch(err=>console.log(err))
 }
-
 function removeExpensefromUI(expenseid){
     const expenseElemId = `expense - ${expenseid}`;
     document.getElementById(expenseElemId).remove();
 }
-
 document.getElementById('rzp-button1').onclick = async function (e) {
     const token = localStorage.getItem('token')
     const response  = await axios.get('http://localhost:4000/purchase/premiummembership', { headers: {"Authorization" : token} });
@@ -156,7 +149,6 @@ document.getElementById('rzp-button1').onclick = async function (e) {
     alert('Something went wrong')
  });
 }
-
 function showLeaderboard(){
     const inputElement = document.createElement("input")
     inputElement.type = "button"
@@ -174,4 +166,7 @@ function showLeaderboard(){
     }
     document.getElementById("message").appendChild(inputElement);
 
+}
+function forgotpassword() {
+    window.location.href = "./forgot.html"
 }

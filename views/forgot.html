@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Expense Tracker - Forgot Password</title>
+</head>
+<body>
+    <form onsubmit="forgotpassword(event)">
+        <label for="email">Email : </label>
+        <input type="email" name="email" required>
+        <button type="submit"> Send Mail</button>
+    </form>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        function forgotpassword(e) {
+    e.preventDefault();
+    console.log(e.target.name);
+    const form = new FormData(e.target);
+
+    const userDetails = {
+        email: form.get("email"),
+
+    }
+    console.log(userDetails)
+    axios.post('http://localhost:4000/password/forgotpassword',userDetails).then(response => {
+        if(response.status === 202){
+            document.body.innerHTML += '<div style="color:red;">Mail Successfuly sent <div>'
+        } else {
+            throw new Error('Something went wrong!!!')
+        }
+    }).catch(err => {
+        document.body.innerHTML += `<div style="color:red;">${err} <div>`;
+    })
+}
+    </script>
+
+</body>
+</html>
