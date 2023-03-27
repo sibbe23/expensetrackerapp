@@ -1,12 +1,31 @@
 const Expense = require('../models/expenses')
 const User = require('../models/users')
 const sequelize = require('../util/database')
-
+const Userservices = require('../services/userservices')
+const S3service = require('../services/S3services')
 
 function stringvalidator(string){
     if(string == undefined || string.length === 0)
     return true
     else return false
+}
+
+
+const downloadexpense = async(req,res)=>{
+    try{
+    const expenses =await Userservices.getExpenses(req);
+    console.log(expenses)
+    const stringifiedExpenses = JSON.stringify(expenses)
+    const userId = req.user.id
+    
+    const filename = `Expenses${userId}/${new Date()}.txt`
+    const fileURL = await S3service.uploadToS3(stringifiedExpenses,filename)
+    res.status(200).json({fileURL,success:true})
+    }
+    catch(err){
+        console.log(err)
+        res.status(500).json({fileURL:'',success:false,err:err})
+    }
 }
 
 const addexpense = async(req,res)=>{
@@ -77,5 +96,6 @@ const deleteexpense = async(req,res)=>{
 module.exports = {
     addexpense,
     getexpenses,
-    deleteexpense
+    deleteexpense,
+    downloadexpense
 }

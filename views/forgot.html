@@ -14,7 +14,7 @@
     </form>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-        function forgotpassword(e) {
+      async  function forgotpassword(e) {
     e.preventDefault();
     console.log(e.target.name);
     const form = new FormData(e.target);
@@ -24,7 +24,7 @@
 
     }
     console.log(userDetails)
-    axios.post('http://localhost:4000/password/forgotpassword',userDetails).then(response => {
+  await  axios.post('http://localhost:4000/password/forgotpassword',userDetails).then(response => {
         if(response.status === 202){
             document.body.innerHTML += '<div style="color:red;">Mail Successfuly sent <div>'
         } else {

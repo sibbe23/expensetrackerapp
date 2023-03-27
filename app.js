@@ -34,8 +34,10 @@ app.use('/password', resetPasswordRoutes);
 //userid
 User.hasMany(Expense)
 Expense.belongsTo(User)
+
 User.hasMany(Order)
 Order.belongsTo(User)
+
 User.hasMany(Forgotpassword);
 Forgotpassword.belongsTo(User);
 

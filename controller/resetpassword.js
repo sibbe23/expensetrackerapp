@@ -29,16 +29,14 @@ const forgotpassword = async (req, res) => {
                             email:email
                         }
                     ]
-                    try{
+                    
                          tranEmailApi.sendTransacEmail({
                              sender,
                              to:receivers,
                              subject:'Hello there',
                              htmlContent:`<a href="http://localhost:4000/password/resetpassword/${id}">Click here to reset password</a>`,
                          })
-                         }catch(err){
-                            console.log(err)
-                         }
+                      
         }else {
             throw new Error('User doesnt exist')
         }
