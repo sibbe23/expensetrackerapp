@@ -4,18 +4,36 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../public/stylesheet.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <title>Expense Tracker - Sign up</title>
 </head>
-<body>
-    <form onsubmit="signup(event)" >
-        <label for="name">Enter Name</label>
+<body style="background-image: url('login.jpg');">
+    <div class="center">
+        <h1>E-TRACKER</h1>
+        <h3>SIGN-UP</h3>
+    <form onsubmit="signup(event)" class="sign-in-form" >
+        <div class="txt_field">
         <input type="text" name="name" required>
-        <label for="email">Enter Email</label>
+        <span></span>
+        <label for="name">Enter Userame</label>
+    </div>
+    <div class="txt_field">
         <input type="email" name="email" required>
-        <label for="password">Enter Password</label>
+        <span></span>
+        <label for="email">Enter Email</label>
+    </div>
+    <div class="txt_field">
         <input type="password" name="password" required>
-        <button >Sign Up</button>
+        <span></span>
+        <label for="password">Enter Password</label>
+    </div>
+        <button class="lobtn" >Sign Up</button>
+        <div class="signup_link">   
         <p>Existing User?<a href="login.html">Login</a></p>
+        </div>
     </form>
     <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
     <script src ="./expensetracker.js"></script>

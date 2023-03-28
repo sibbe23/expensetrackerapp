@@ -4,21 +4,41 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../public/stylesheet.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <title>Expense Tracker - Login</title>
 </head>
-<body>
-    <form onsubmit="login(event)" >
-        <label for="email">Email</label>
-        <input type="email" name="email" required>
-        <label for="password">Password</label>
+<body style="background-image: url('login.jpg');">
+        <div class="center">
+            <h1>E-TRACKER</h1>
+            <h3>LOGIN</h3>
+    <form onsubmit="login(event)" class="sign-in-form">
+        <div class="txt_field">
+        <input type="email" name="email"  required>
+        <span></span>
+        <label for="email">Username/Email</label>
+        </div>
+        <div class="txt_field">
         <input type="password" name="password" required>
-        <button >Login</button>
+        <span></span>
+        <label for="password">Password</label>
+    </div>
+        <button class="lobtn">Login</button>
     </form>
-    <button onclick="forgotpassword()"> Forgot password</button>
-    <p>New User?<a href="signup.html">Sign up</a></p>
+<div class="pass">
+    <button onclick="forgotpassword()" class="fobtn"> Forgot password</button>
+</div>
+ <div class="signup_link">   
+    <p>New User? <a href="signup.html">Sign up</a></p>
+    </div>
+</div>
+
 
     <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
     <script src ="./expensetracker.js"></script>
+    
 </body>
 
 </html>

@@ -67,7 +67,7 @@ function addNewExpense(e){
 }
 function showPremiumuserMessage() {
     document.getElementById('rzp-button1').style.visibility = "hidden"
-    document.getElementById('message').innerHTML = "You are a premium user "
+    document.getElementById('message').innerHTML = "<h4>Premium Activated</h4><h6>You can now download and save your expenses!</h6> "
 }
 function parseJwt (token) {
     var base64Url = token.split('.')[1];
@@ -101,7 +101,7 @@ function addNewExpensetoUI(expense){
     parentElement.innerHTML += `
         <li id=${expenseElemId}>
             ${expense.expenseamount} - ${expense.category} - ${expense.description}
-            <button onclick='deleteExpense(event, ${expense.id})'>
+            <button onclick='deleteExpense(event, ${expense.id})' class="delbtn">
                 Delete Expense
             </button>
         </li>`
@@ -153,13 +153,14 @@ function showLeaderboard(){
     const inputElement = document.createElement("input")
     inputElement.type = "button"
     inputElement.value = 'Show Leaderboard'
+    inputElement.className='lobtn1'
     inputElement.onclick = async() => {
         const token = localStorage.getItem('token')
         const userLeaderBoardArray = await axios.get('http://localhost:4000/premium/showLeaderBoard', { headers: {"Authorization" : token} })
         console.log(userLeaderBoardArray)
 
         var leaderboardElem = document.getElementById('leaderboard')
-        leaderboardElem.innerHTML += '<h1> Leader Board </<h1>'
+        leaderboardElem.innerHTML += '<h1> Leader Board </h1>'
         userLeaderBoardArray.data.forEach((userDetails) => {
             leaderboardElem.innerHTML += `<li>Name - ${userDetails.name} Total Expense - ${userDetails.totalExpenses || 0} </li>`
         })
@@ -170,7 +171,6 @@ function showLeaderboard(){
 function forgotpassword() {
     window.location.href = "./forgot.html"
 }
-
 function download(){
     const token = localStorage.getItem('token')
     axios.get('http://localhost:4000/expense/download', { headers: {"Authorization" : token} })

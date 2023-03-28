@@ -4,14 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../public/stylesheet.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <title>Expense Tracker - Forgot Password</title>
 </head>
-<body>
-    <form onsubmit="forgotpassword(event)">
-        <label for="email">Email : </label>
+<body style="background-image: url('login.jpg'); " >
+    <div class="center">
+        <h1>E-TRACKER</h1>
+        <h3>FORGOT-PASSWORD</h3>
+    <form onsubmit="forgotpassword(event)" class="sign-in-form">
+        <div class="txt_field">
         <input type="email" name="email" required>
-        <button type="submit"> Send Mail</button>
+        <span></span>
+        <label for="email">Email : </label>
+        </div>
+        <button type="submit" class="lobtn"> Send Mail</button>
     </form>
+    <button onclick="history.back()" class="fobtn">Back</button>
+</div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
       async  function forgotpassword(e) {

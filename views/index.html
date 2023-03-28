@@ -4,14 +4,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../public/stylesheet.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <title>Expense Tracker</title>
 </head>
-<body>
-    <form onsubmit="addNewExpense(event)">
-    <label for ="expenseamount"> Choose expenseamount :</label>
+<body style="background-image: url('bgimg.jpg'); background-repeat: no-repeat;">
+    <div class="centers">
+        <h1>E-TRACKER</h1>
+        <ul id="welcomeuser"></ul>
+        <form onsubmit="addNewExpense(event)" class="sign-in-form">
+        <div class="txt_field">
     <input type = "number" name="expenseamount" required>
-    <label for="description"> Choose description :</label>
+    <span></span>
+    <label for ="expenseamount"> Choose expenseamount :</label>
+</div>
+<div class="txt_field">
     <input type="text" name="description" required>
+    <span></span>
+    <label for="description"> Choose description :</label>
+    </div>
     <label for="category">Choose a category :</label>
     <select id="category" name="category">
         <option value="fuel">Fuel</option>
@@ -19,15 +32,32 @@
         <option value="electricity">Electricity</option>
         <option value="movie">Movie</option>
     </select>
-    <button>Add Expense</button>
+    <br>
+    <br>
+    <button class="lobtns">Add Expense</button>
+    <br>
+    <br>
     </form>
+</div>
+<div class="centers">
     <div id="message"></div>
-    <button id="rzp-button1">Buy Premium</button>
-    <button onclick="download()" id="downloadexpense">Download File</button>
-    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-    <ul id="listOfExpenses"></ul>
-    <ul id="leaderboard"></ul>
+    <button id="rzp-button1" class="lobtn4">Buy Premium</button>
     
+    <button onclick="download()" id="downloadexpense" class="lobtn2">Download File</button>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    </div>
+    <div class="centers1">
+    <ul id="listOfExpenses" class="signups_link"><h2>Expenses</h2></ul>
+    </div><div class="centers1">
+    <ul id="leaderboard"></ul>
+    <button class="logout" onclick="logouts()">Log out</button>
+    <script>
+        function logouts(){
+            alert('Logged out')
+            window.location.href="/views/login.html"
+        }
+    </script>
+</div>
     <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
     <script src="./expensetracker.js"></script>
 </body>
