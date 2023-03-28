@@ -171,6 +171,7 @@ form .txt_field{
     border-radius: 10px;
     box-shadow: 10px 10px 15px rgba(0,0,0,0.05);
     padding: 2% 2% 2% 2%;
+    font-size: 25px;
 }
 
 .centers h1{
@@ -179,6 +180,7 @@ form .txt_field{
     padding-top: 25px;
     cursor: no-drop;
     margin-left: 1%;
+    color: rgb(16, 128, 104);
   }
   .centers form{
     padding: 0 40px;
@@ -193,6 +195,7 @@ form .txt_field{
     color: #8f8e8e;
     padding-bottom: 25px;
     cursor: no-drop;
+    font-size: 10px;
 
 }
 
@@ -309,7 +312,6 @@ form .txt_field{
     border-radius: 10px;
     box-shadow: 10px 10px 15px rgba(0,0,0,0.05);
     padding: 2% 2% 2% 2%;
-    padding-bottom: 5%;
 }
 
 .centers1 h1{
@@ -332,6 +334,7 @@ form .txt_field{
     color: #8f8e8e;
     padding-bottom: 25px;
     cursor: no-drop;
+    
 
 }
 
@@ -349,4 +352,36 @@ form .txt_field{
     cursor: pointer;
     margin-bottom: 1%;
     margin-left: 45.5%;
+}
+
+.welcome{
+    font-family: "Poppins", sans-serif;
+
+}
+
+.heading h1{
+    font-size:xx-large;
+    color: #000;
+    
+}
+
+.centers h2{
+    text-align: center;
+    border-bottom: 1px solid silver;
+    padding-bottom: 2%;
+
+}
+
+.centers2{
+    position:relative;
+    margin-top: 2%;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-bottom: 4%;
+    border-radius: 10px;
+    box-shadow: 10px 10px 15px rgba(0,0,0,0.05);
+    padding: 2% 2% 2% 2%;
+    font-size: 25px;
+    text-align: center;
+    color: black;
 }

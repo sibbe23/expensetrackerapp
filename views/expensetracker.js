@@ -86,6 +86,7 @@ window.addEventListener('DOMContentLoaded',()=>{
     if(ispremiumuser){
         showPremiumuserMessage()
         showLeaderboard()
+        showUsername()
     }
     axios.get('http://localhost:4000/expense/getexpenses',{headers:{'Authorization':token}})
     .then(response =>{
@@ -95,6 +96,14 @@ window.addEventListener('DOMContentLoaded',()=>{
     })
     .catch(err=>console.log(err))
 })
+function showUsername(){
+    const token = localStorage.getItem('token')
+    const decodeTokens = parseJwt(token)
+    const usernames = decodeTokens.name;
+    console.log(usernames)
+    const parent = document.getElementById('usern')
+    parent.innerHTML +=`<br> <br> <br> <br>Welcome to E-Tracker Mr.${usernames} We help you with all your Financial Management faster and easier`;
+}
 function addNewExpensetoUI(expense){
     const parentElement = document.getElementById('listOfExpenses');
     const expenseElemId = `expense-${expense.id}`;
@@ -134,6 +143,7 @@ document.getElementById('rzp-button1').onclick = async function (e) {
         
         console.log(res)
          alert('You are a Premium User Now')
+         window.location.reload()
          document.getElementById('rzp-button1').style.visibility = "hidden"
          document.getElementById('message').innerHTML = "You are a premium user "
          localStorage.setItem('token', res.data.token)

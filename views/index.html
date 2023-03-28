@@ -10,11 +10,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <title>Expense Tracker</title>
 </head>
-<body style="background-image: url('bgimg.jpg'); background-repeat: no-repeat;">
+<body style="background-image: url('bg4.jpg'); background-repeat:repeat;">
     <div class="centers">
         <h1>E-TRACKER</h1>
-        <ul id="welcomeuser"></ul>
+        <h3>Beware of little expenses. A small leak will sink a great ship.
+        </h3>
         <form onsubmit="addNewExpense(event)" class="sign-in-form">
+            <div class="heading">
+            <h1>Add Expense</h1>
+            </div>
         <div class="txt_field">
     <input type = "number" name="expenseamount" required>
     <span></span>
@@ -50,6 +54,8 @@
     <ul id="listOfExpenses" class="signups_link"><h2>Expenses</h2></ul>
     </div><div class="centers1">
     <ul id="leaderboard"></ul>
+    <ul id="usern" class="signup_link"></ul>
+</div>
     <button class="logout" onclick="logouts()">Log out</button>
     <script>
         function logouts(){
