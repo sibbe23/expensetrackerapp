@@ -1,0 +1,39 @@
+.grid{
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+}
+.download{
+    display: none;
+}
+.width{
+    width: 35%;
+}
+@media only screen and (max-width: 768px){
+    .width{
+        width: 75%;
+    }
+    h3{
+        font-size: 1.5rem;
+    }
+}
+@media only screen and (max-width: 567px){
+    .width{
+        width: 90%;
+    }
+}
+
+.widths{
+    width:100%;
+}
+
+.dark-mode {
+    background-color: black;
+    color: white;
+  }
+  
+  body {
+    background-color: white;
+    color: black;
+    font-size: 25px;
+  }
+  
