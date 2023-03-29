@@ -67,7 +67,7 @@ function addNewExpense(e){
 }
 function showPremiumuserMessage() {
     document.getElementById('rzp-button1').style.visibility = "hidden"
-    document.getElementById('message').innerHTML = "<h4>Premium Activated</h4><h6>You can now see the Leaderboard and see how much people around you has saved!</h6> "
+    document.getElementById('message').innerHTML = `<h4 class="text-center ">Premium Activated</h4>`
 }
 function parseJwt (token) {
     var base64Url = token.split('.')[1];
@@ -86,7 +86,6 @@ window.addEventListener('DOMContentLoaded',()=>{
     if(ispremiumuser){
         showPremiumuserMessage()
         showLeaderboard()
-        showUsername()
     }
     axios.get('http://localhost:4000/expense/getexpenses',{headers:{'Authorization':token}})
     .then(response =>{
@@ -96,24 +95,36 @@ window.addEventListener('DOMContentLoaded',()=>{
     })
     .catch(err=>console.log(err))
 })
-function showUsername(){
-    const token = localStorage.getItem('token')
-    const decodeTokens = parseJwt(token)
-    const usernames = decodeTokens.name;
-    console.log(usernames)
-    const parent = document.getElementById('usern')
-    parent.innerHTML +=`Welcome to E-Tracker Mr.${usernames} <object data="premiumuser.svg" class="premium"></object> We help you with all your Financial Management faster and easier`;
-}
+
 function addNewExpensetoUI(expense){
-    const parentElement = document.getElementById('listOfExpenses');
+    // const parentElement = document.getElementById('listOfExpenses');
+    // parentElement.innerHTML += `
+    //     <li id=${expenseElemId}>
+    //         ${expense.expenseamount} - ${expense.category} - ${expense.description}
+    //         <button onclick='deleteExpense(event, ${expense.id})' class="delbtn">
+    //             Delete Expense
+    //         </button>
+    //     </li>`
+
+
+    var x = document.getElementsByTagName('tr')
+    var i=0;
+    var txt=""
+    for(i;i<x.length;i++){
+        txt = x[i].rowIndex +1;
+    }
+    const tbodyElem = document.querySelector('tbody')
     const expenseElemId = `expense-${expense.id}`;
-    parentElement.innerHTML += `
-        <li id=${expenseElemId}>
-            ${expense.expenseamount} - ${expense.category} - ${expense.description}
-            <button onclick='deleteExpense(event, ${expense.id})' class="delbtn">
-                Delete Expense
-            </button>
-        </li>`
+        tbodyElem.innerHTML +=`<tr id='${expenseElemId}' class="text-success">
+        <td>${txt}</td>
+        <td>${expense.expenseamount}</td>
+        <td>${expense.category}</td>
+        <td>${expense.description}</td>
+        <td> <button class="btn btn-danger"onclick='deleteExpense(event, ${expense.id})' class="delbtn">
+        Delete Expense
+    </button></td>
+    </tr>
+        `
 }
 function deleteExpense(e,expenseid){
     const token = localStorage.getItem('token')
@@ -163,7 +174,7 @@ function showLeaderboard(){
     const inputElement = document.createElement("input")
     inputElement.type = "button"
     inputElement.value = 'Show Leaderboard'
-    inputElement.className='lobtn1'
+    inputElement.className='btn btn-primary text-white widths'
     inputElement.onclick = async() => {
         const token = localStorage.getItem('token')
         const userLeaderBoardArray = await axios.get('http://localhost:4000/premium/showLeaderBoard', { headers: {"Authorization" : token} })
