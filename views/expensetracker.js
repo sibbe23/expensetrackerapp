@@ -67,7 +67,7 @@ function addNewExpense(e){
 }
 function showPremiumuserMessage() {
     document.getElementById('rzp-button1').style.visibility = "hidden"
-    document.getElementById('message').innerHTML = "<h4>Premium Activated</h4><h6>You can now download and save your expenses!</h6> "
+    document.getElementById('message').innerHTML = "<h4>Premium Activated</h4><h6>You can now see the Leaderboard and see how much people around you has saved!</h6> "
 }
 function parseJwt (token) {
     var base64Url = token.split('.')[1];
@@ -102,7 +102,7 @@ function showUsername(){
     const usernames = decodeTokens.name;
     console.log(usernames)
     const parent = document.getElementById('usern')
-    parent.innerHTML +=`<br> <br> <br> <br>Welcome to E-Tracker Mr.${usernames} We help you with all your Financial Management faster and easier`;
+    parent.innerHTML +=`Welcome to E-Tracker Mr.${usernames} <object data="premiumuser.svg" class="premium"></object> We help you with all your Financial Management faster and easier`;
 }
 function addNewExpensetoUI(expense){
     const parentElement = document.getElementById('listOfExpenses');

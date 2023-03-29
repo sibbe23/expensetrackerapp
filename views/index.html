@@ -10,15 +10,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <title>Expense Tracker</title>
 </head>
-<body style="background-image: url('bg4.jpg'); background-repeat:repeat;">
+<body style="background-image: url('2.jpg'); background-repeat:repeat;">
     <div class="centers">
         <h1>E-TRACKER</h1>
         <h3>Beware of little expenses. A small leak will sink a great ship.
         </h3>
-        <form onsubmit="addNewExpense(event)" class="sign-in-form">
-            <div class="heading">
+    </div>
+    <div class="centers">
+        <div class="heading">
             <h1>Add Expense</h1>
             </div>
+        <form onsubmit="addNewExpense(event)" class="sign-in-form">
+            
         <div class="txt_field">
     <input type = "number" name="expenseamount" required>
     <span></span>
@@ -29,6 +32,7 @@
     <span></span>
     <label for="description"> Choose description :</label>
     </div>
+    <div class="dropdown">
     <label for="category">Choose a category :</label>
     <select id="category" name="category">
         <option value="fuel">Fuel</option>
@@ -36,11 +40,9 @@
         <option value="electricity">Electricity</option>
         <option value="movie">Movie</option>
     </select>
-    <br>
-    <br>
+    </div>
+
     <button class="lobtns">Add Expense</button>
-    <br>
-    <br>
     </form>
 </div>
 <div class="centers">
@@ -54,9 +56,10 @@
     <ul id="listOfExpenses" class="signups_link"><h2>Expenses</h2></ul>
     </div><div class="centers1">
     <ul id="leaderboard"></ul>
-    <ul id="usern" class="signup_link"></ul>
-</div>
+    <ul id="usern" class="user"></ul>
     <button class="logout" onclick="logouts()">Log out</button>
+</div>
+
     <script>
         function logouts(){
             alert('Logged out')

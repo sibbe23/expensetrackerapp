@@ -11,6 +11,7 @@ body{
   padding: 0;
   background: linear-gradient(120deg,#2980b9, #8e44ad);
   height: 100vh;
+  
 }
 .center{
   position: absolute;
@@ -34,14 +35,13 @@ body{
 }
 form .txt_field{
   position: relative;
-  border-bottom: 2px solid #adadad;
   margin: 30px 0;
 }
 .txt_field input{
   width: 100%;
   padding: 0 5px;
   height: 40px;
-  font-size: 16px;
+  font-size: 18px;
   border: none;
   background: none;
   outline: none;
@@ -50,7 +50,7 @@ form .txt_field{
   position: absolute;
   top: 50%;
   left: 5px;
-  color: #adadad;
+  color: #000000;
   transform: translateY(-50%);
   font-size: 16px;
   pointer-events: none;
@@ -163,40 +163,44 @@ form .txt_field{
 
 .centers{
     position:relative;
-    margin-top: 2%;
+    margin-top: 0.5%;
     margin-left: 2%;
     margin-right: 2%;
-    margin-bottom: 4%;
+    margin-bottom: 1%;
     background: white;
     border-radius: 10px;
     box-shadow: 10px 10px 15px rgba(0,0,0,0.05);
-    padding: 2% 2% 2% 2%;
+    padding-bottom: 1%;
+    padding-top: 0.5%;
+    padding-left: 1%;
+    padding-right: 1%;
     font-size: 25px;
 }
 
 .centers h1{
-    text-align: center;
+    text-align: start;
     padding: 0px;
-    padding-top: 25px;
+    padding-top: 2px;
     cursor: no-drop;
-    margin-left: 1%;
-    color: rgb(16, 128, 104);
+    margin-left: 0%;
+    color: rgb(0, 38, 30);
+    
   }
   .centers form{
-    padding: 0 40px;
+    padding: 0 20px;
     box-sizing: border-box;
-    border-bottom: 1px solid silver;
+    border-bottom: 1px solid rgb(0, 0, 0);
 
   }
 
   .centers h3{
-    text-align: center;
-    border-bottom: 1px solid silver;
-    color: #8f8e8e;
-    padding-bottom: 25px;
+    text-align: start;
+    border-bottom: 0px solid rgb(0, 0, 0);
+    color: #000000;
+    padding-bottom: 0px;
     cursor: no-drop;
-    font-size: 10px;
-
+    font-size: 15px;
+    
 }
 
 
@@ -213,6 +217,7 @@ form .txt_field{
     font-weight: 400;
     cursor: pointer;
     margin-left: 45%;
+    margin-bottom: 1%;
     
 }
 
@@ -229,7 +234,7 @@ form .txt_field{
     font-weight: 400;
     cursor: pointer;
     margin-left: 85%;
-    margin-top: 2%;
+    margin-top: 0%;
 }
 
 .lobtn2{
@@ -257,18 +262,18 @@ form .txt_field{
 }
 
 .signups_link{
-    margin: 30px 0;
-    text-align: center;
+    margin: 0px 0;
+    text-align: start;
     font-size: 16px;
     color: #000000;
-    border-bottom: 1px solid silver;
+    border-bottom: 1px solid rgb(0, 0, 0);
   }
 
   .signups_link h2{
     font-size:xx-large;
-    border-bottom: 1px solid silver;
+    border-bottom: 1px solid rgb(0, 0, 0);
     padding-bottom: 2%;
-    margin-left: 1%;
+    margin-left: 0%;
   }
 
   .lobtn4{
@@ -283,7 +288,7 @@ form .txt_field{
     font-weight: 400;
     cursor: pointer;
     margin-left: 83.8%;
-    margin-top: 2%;
+    margin-top: 0%;
 }
 .lobtn4:hover{
     color: #00b153;
@@ -291,35 +296,39 @@ form .txt_field{
 }
 .centers h4{
     font-size: 30px;
-    color: #8e44ad;
-    text-align: center;
+    color: #000000;
+    text-align:start;
     margin-left: 1%;
+    margin-top: 1%;
 }
 
 .centers h6{
-    font-size: 10px;
+    font-size: 15px;
     color: #000000;
-    text-align: center;
+    text-align: start;
     margin-left: 1%;
 }
 
 .centers1{
     position:relative;
-    margin-top: 2%;
     margin-left: 2%;
     margin-right: 2%;
     background: white;
     border-radius: 10px;
     box-shadow: 10px 10px 15px rgba(0,0,0,0.05);
     padding: 2% 2% 2% 2%;
+    margin-top: 0%;
+    margin-bottom: 0.5%;
 }
 
 .centers1 h1{
-    text-align: center;
+    text-align: start;
     padding: 0px;
     padding-top: 25px;
     cursor: no-drop;
-    margin-left: 1%;
+    margin-left: 0%;
+    padding-bottom: 20px;
+   
   }
   .centers1 form{
     padding: 0 40px;
@@ -329,7 +338,7 @@ form .txt_field{
   }
 
   .centers1 h3{
-    text-align: center;
+    text-align: start;
     border-bottom: 1px solid silver;
     color: #8f8e8e;
     padding-bottom: 25px;
@@ -362,11 +371,14 @@ form .txt_field{
 .heading h1{
     font-size:xx-large;
     color: #000;
-    
+    text-align: start;
+    border-bottom: 1px solid rgb(0, 0, 0);
+  padding-bottom: 1%;
+    padding-top: 1%;
 }
 
 .centers h2{
-    text-align: center;
+    text-align: start;
     border-bottom: 1px solid silver;
     padding-bottom: 2%;
 
@@ -384,4 +396,27 @@ form .txt_field{
     font-size: 25px;
     text-align: center;
     color: black;
+}
+.dropdown{
+  text-align: left;
+  font-size: 18px;
+}
+.premium{
+  width: 16px;
+  height: 16px;
+  padding-top: 2px;
+}
+
+.sign-in-form{
+  margin-bottom: 1%;
+  padding-bottom: 0%;
+  padding-top: 0%;
+  margin-top: 0%;
+}
+
+.user{
+  margin: 0px 0;
+  text-align: center;
+  font-size: 16px;
+  color: #666666;
 }
