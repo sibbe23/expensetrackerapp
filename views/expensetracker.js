@@ -55,7 +55,8 @@ function addNewExpense(e){
     const expenseDetails = {
         expenseamount : e.target.expenseamount.value,
         description : e.target.description.value,
-        category : e.target.category.value
+        category : e.target.category.value,
+        income :e.target.income.value
     }
     console.log(expenseDetails)
     const token = localStorage.getItem('token')
@@ -95,7 +96,6 @@ window.addEventListener('DOMContentLoaded',()=>{
     })
     .catch(err=>console.log(err))
 })
-
 function addNewExpensetoUI(expense){
     // const parentElement = document.getElementById('listOfExpenses');
     // parentElement.innerHTML += `
@@ -120,6 +120,7 @@ function addNewExpensetoUI(expense){
         <td>${expense.expenseamount}</td>
         <td>${expense.category}</td>
         <td>${expense.description}</td>
+        <td>${expense.income}</td>
         <td> <button class="btn btn-danger"onclick='deleteExpense(event, ${expense.id})' class="delbtn">
         Delete Expense
     </button></td>
@@ -133,6 +134,8 @@ function deleteExpense(e,expenseid){
         removeExpensefromUI(expenseid);
     })
     .catch(err=>console.log(err))
+    window.location.reload()
+
 }
 function removeExpensefromUI(expenseid){
     const expenseElemId = `expense - ${expenseid}`;
@@ -176,6 +179,7 @@ function showLeaderboard(){
     inputElement.value = 'Show Leaderboard'
     inputElement.className='btn btn-primary text-white widths'
     inputElement.onclick = async() => {
+        inputElement.style.visibility="hidden"
         const token = localStorage.getItem('token')
         const userLeaderBoardArray = await axios.get('http://localhost:4000/premium/showLeaderBoard', { headers: {"Authorization" : token} })
         console.log(userLeaderBoardArray)
@@ -186,8 +190,23 @@ function showLeaderboard(){
             leaderboardElem.innerHTML += `<li>Name - ${userDetails.name} Total Expense - ${userDetails.totalExpenses || 0} </li>`
         })
     }
-    document.getElementById("message").appendChild(inputElement);
+       // <button onclick="download()" id="downloadexpense" class="btn btn-dark text-white widths">Download File </button>
+const downloadElem = document.createElement('input')
+downloadElem.type='button'
+downloadElem.id = 'downloadexpense'
+downloadElem.className ='btn btn-dark text-white widths'
+downloadElem.value = 'Download File'
+const br = document.createElement('br')
+const br1 = document.createElement('br')
 
+downloadElem.onclick = async() =>{
+download()    
+}
+    
+    document.getElementById("message").appendChild(inputElement);
+    document.getElementById('message').appendChild(br)
+    document.getElementById('message').appendChild(br1)
+    document.getElementById('message').appendChild(downloadElem)
 }
 function forgotpassword() {
     window.location.href = "./forgot.html"

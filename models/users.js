@@ -25,6 +25,10 @@ const User = sequelize.define("user",{
     totalExpenses:{
         type:Sequelize.STRING,
         defaultValue:0
+    },
+    Time:{
+        type:Sequelize.STRING,
+        defaultValue:0
     }
 });
 

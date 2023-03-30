@@ -30,14 +30,14 @@ const downloadexpense = async(req,res)=>{
 
 const addexpense = async(req,res)=>{
     const t = await sequelize.transaction()
-    const {expenseamount,description,category} = req.body;
+    const {expenseamount,description,category,income} = req.body;
     if(stringvalidator(expenseamount) || stringvalidator(description) || stringvalidator(category))
     {
         return res.status(400).json({err:'Fields left empty'})
     }
 
-    Expense.create({expenseamount,description,category,userId:req.user.id},{transaction:t}).then(expense =>{
-        const totalExpense = Number(req.user.totalExpenses) + Number(expenseamount)
+    Expense.create({expenseamount,description,category,userId:req.user.id,income},{transaction:t}).then(expense =>{
+        const totalExpense = Number(req.user.totalExpenses) + Number(expenseamount) - Number(income)
         console.log(totalExpense)
         User.update({totalExpenses:totalExpense},{
             where:{id:req.user.id},
@@ -78,7 +78,7 @@ const deleteexpense = async(req,res)=>{
     }
     const expense = await Expense.findByPk(expenseid, { transaction: t });
     const users = await User.findByPk(req.user.id, { transaction: t });
-    users.totalExpenses -= expense.expenseamount;
+    users.totalExpenses = users.totalExpenses - expense.expenseamount +expense.income ;
     await t.commit()
     await users.save()
 

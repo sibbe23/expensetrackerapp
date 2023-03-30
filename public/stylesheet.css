@@ -78,7 +78,7 @@ form .txt_field{
 }
 .pass{
   margin: -5px 0 20px 5px;
-  color: #a6a6a6;
+  color: #817676;
   cursor: pointer;
 }
 .pass:hover{
@@ -123,7 +123,7 @@ form .txt_field{
   margin: 30px 0;
   text-align: center;
   font-size: 16px;
-  color: #666666;
+  color: #000000;
 }
 .signup_link a{
   color: #2691d9;
