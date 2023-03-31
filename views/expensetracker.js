@@ -79,8 +79,10 @@ function parseJwt (token) {
 
     return JSON.parse(jsonPayload);
 }
-window.addEventListener('DOMContentLoaded',()=>{
+window.addEventListener('DOMContentLoaded',async()=>{
     const token = localStorage.getItem('token')
+    const ltd = localStorage.getItem('row') || 10;
+    const page=1;
     const decodeToken = parseJwt(token)
     console.log(decodeToken)
     const ispremiumuser = decodeToken.ispremiumuser
@@ -88,14 +90,18 @@ window.addEventListener('DOMContentLoaded',()=>{
         showPremiumuserMessage()
         showLeaderboard()
     }
-    axios.get('http://localhost:4000/expense/getexpenses',{headers:{'Authorization':token}})
-    .then(response =>{
-        response.data.expenses.forEach(expense=>{
-            addNewExpensetoUI(expense)
+    if(token){
+   const response = await axios.get(`http://localhost:4000/expense/data?page=${page}=${ltd}`,{headers:{'Authorization':token}})
+        console.log(response)
+        response.data.expenses.forEach(response=>            addNewExpensetoUI(response)
+        )
+            showPagination(response)}
+            else{
+                location.replace('./login.html')
+            }
         })
-    })
-    .catch(err=>console.log(err))
-})
+    
+
 function addNewExpensetoUI(expense){
     // const parentElement = document.getElementById('listOfExpenses');
     // parentElement.innerHTML += `
@@ -115,7 +121,7 @@ function addNewExpensetoUI(expense){
     }
     const tbodyElem = document.querySelector('tbody')
     const expenseElemId = `expense-${expense.id}`;
-        tbodyElem.innerHTML +=`<tr id='${expenseElemId}' class="text-success">
+        tbodyElem.innerHTML +=`<tr id='${expenseElemId}' class="text-success datas">
         <td>${txt}</td>
         <td>${expense.expenseamount}</td>
         <td>${expense.category}</td>
@@ -126,6 +132,7 @@ function addNewExpensetoUI(expense){
     </button></td>
     </tr>
         `
+     
 }
 function deleteExpense(e,expenseid){
     const token = localStorage.getItem('token')
@@ -194,7 +201,7 @@ function showLeaderboard(){
 const downloadElem = document.createElement('input')
 downloadElem.type='button'
 downloadElem.id = 'downloadexpense'
-downloadElem.className ='btn btn-dark text-white widths'
+downloadElem.className ='btn btn-primary text-white widths'
 downloadElem.value = 'Download File'
 const br = document.createElement('br')
 const br1 = document.createElement('br')
@@ -229,3 +236,51 @@ function download(){
         console.log(err)
     });
 }
+
+const setRow = () => {
+    let row = document.getElementById('rowOptions').value;
+    localStorage.setItem("row", row);
+    window.location.reload()
+  }
+ 
+const showPagination = async (response) => {
+    const pagination = document.getElementById('paginations')
+    pagination.innerHTML = "";
+    if (response.data.hasPreviousPage) {
+      const btn = document.createElement("button");
+      btn.className = "m-1"
+      btn.innerHTML = response.data.previousPage;
+      await btn.addEventListener("click", () => {
+        getExpense(response.data.previousPage)
+      });
+      pagination.appendChild(btn);
+    }
+    const btn1 = document.createElement("button");
+    btn1.className = "m-1"
+    btn1.innerHTML = `<h3>${response.data.currentPage}</h3>`;
+    await btn1.addEventListener("click", () => {
+      getExpense(response.data.currentPage)
+    });
+    pagination.appendChild(btn1);
+    if (response.data.hasNextPage) {
+      const btn2 = document.createElement("button");
+      btn2.className = "m-1"
+      btn2.innerHTML = response.data.nextPage;
+      btn2.addEventListener("click", async () => {
+        await getExpense(response.data.nextPage);
+      });
+      pagination.appendChild(btn2);
+    }
+  };
+  const getExpense = async(page) => {
+    const token = localStorage.getItem('token')
+    const ltd = localStorage.getItem("row");
+const expense = await axios.get(`http://localhost:4000/expense/data?page=${page}=${ltd}`, { headers: { 'Authorization': token }})
+        console.log(expense)
+        expense.data.expenses.forEach(response=>{
+             addNewExpensetoUI(response)
+
+        })
+     await  showPagination(expense);
+
+  }           

@@ -26,6 +26,14 @@ const User = sequelize.define("user",{
         type:Sequelize.STRING,
         defaultValue:0
     },
+    totalIncome:{
+        type:Sequelize.STRING,
+        defaultValue:0
+    },
+    totalSavings:{
+        type:Sequelize.STRING,
+        defaultValue:0
+    },
     Time:{
         type:Sequelize.STRING,
         defaultValue:0

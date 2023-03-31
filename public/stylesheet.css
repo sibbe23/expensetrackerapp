@@ -29,6 +29,8 @@ body{
   padding: 0px;
   padding-top: 25px;
   cursor: no-drop;
+  font-family: "Poppins", sans-serif;
+
 }
 .center form{
   padding: 0 40px;

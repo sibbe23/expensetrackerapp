@@ -48,3 +48,6 @@ sequelize.sync().then(res=>{
     console.log(err);
 })
 
+//pagination
+
+

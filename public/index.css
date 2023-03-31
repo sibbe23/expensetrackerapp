@@ -6,21 +6,9 @@
     display: none;
 }
 .width{
-    width: 35%;
+    width: 15%;
 }
-@media only screen and (max-width: 768px){
-    .width{
-        width: 75%;
-    }
-    h3{
-        font-size: 1.5rem;
-    }
-}
-@media only screen and (max-width: 567px){
-    .width{
-        width: 90%;
-    }
-}
+
 
 .widths{
     width:100%;

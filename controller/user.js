@@ -1,6 +1,7 @@
 const User = require('../models/users')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const Expense = require('../models/expenses')
 
 function stringvalidator(string){
     if(string == undefined || string.length === 0)
@@ -62,10 +63,10 @@ const login = async(req,res)=>{
              res.status(500).json({message:err , success:false})   
         }
     }
-    
 
     module.exports={
         signup,
         login,
-        generateAccessToken
+        generateAccessToken,
+        
     }

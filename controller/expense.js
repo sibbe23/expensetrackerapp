@@ -37,9 +37,11 @@ const addexpense = async(req,res)=>{
     }
 
     Expense.create({expenseamount,description,category,userId:req.user.id,income},{transaction:t}).then(expense =>{
-        const totalExpense = Number(req.user.totalExpenses) + Number(expenseamount) - Number(income)
+        const totalExpense = Number(req.user.totalExpenses) + Number(expenseamount) 
+        const totalIncomes = Number(req.user.totalIncome) + Number(income)
+        const totalSaving = Number(totalIncomes) - Number(totalExpense)
         console.log(totalExpense)
-        User.update({totalExpenses:totalExpense},{
+        User.update({totalExpenses:totalExpense,totalIncome:totalIncomes,totalSavings:totalSaving},{
             where:{id:req.user.id},
             transaction:t
         }) .then(async()=>{
@@ -78,7 +80,9 @@ const deleteexpense = async(req,res)=>{
     }
     const expense = await Expense.findByPk(expenseid, { transaction: t });
     const users = await User.findByPk(req.user.id, { transaction: t });
-    users.totalExpenses = users.totalExpenses - expense.expenseamount +expense.income ;
+    users.totalExpenses = users.totalExpenses - expense.expenseamount  ;
+    users.totalIncome = users.totalIncome - expense.income;
+    users.totalSavings = users.totalIncome - users.totalExpenses
     await t.commit()
     await users.save()
 
@@ -92,10 +96,60 @@ const deleteexpense = async(req,res)=>{
        return res.status(500).json({success:true,message:"failed"})
     })
    }
+   
+//    const pagination = async(req,res)=>{
+//     const page = parseInt(req.query.page)
+//     const limit = parseInt(req.query.limit)
+//     const data = await Expense.findAll()
+    
+//     const startIndex = (page - 1)* limit
+//     const endIndex  = page*limit
+//     const results ={}
+//     if(endIndex<data.length){
+//     results.next={
+//         page : page+1,
+//         limit:limit
+//      }
+//     }
+//     if(startIndex > 0){
+//     results.previous ={
+//         page:page-1,
+//         limit:limit
+//     }}
+
+//  results.results = data.slice(startIndex,endIndex)
+//     res.json(results)
+    
+//    }
+const getAllExpenses = async (req, res, next) => {
+    try {
+      const str = req.query.page;
+      const page = str ? Number(str.split("=")[0]) : 1;
+      const ltd = str ? Number(str.split("=")[1]) : 10;
+      let count = await Expense.count({ where: { userId: req.user.id } });
+      const expenses = await Expense.findAll({
+        where: { userId: req.user.id },
+        offset: (page - 1) * ltd,
+        limit: ltd,
+      });
+      return res.status(200).json({
+        expenses,
+        hasNextPage: ltd * page < count,
+        nextPage: page + 1,
+        hasPreviousPage: page > 1,
+        previousPage: page - 1,
+        lastPage: Math.ceil(count / ltd),
+        currentPage: page,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
 module.exports = {
     addexpense,
     getexpenses,
     deleteexpense,
-    downloadexpense
+    downloadexpense,
+    getAllExpenses
 }
