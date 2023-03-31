@@ -97,7 +97,7 @@ window.addEventListener('DOMContentLoaded',async()=>{
         )
             showPagination(response)}
             else{
-                location.replace('./login.html')
+                location.replace('../views/login.html')
             }
         })
     
