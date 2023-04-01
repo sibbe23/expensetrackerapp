@@ -235,6 +235,7 @@ function download(){
 const setRow = () => {
     let row = document.getElementById('rowOptions').value;
     localStorage.setItem("row", row);
+    window.location.reload()
   }
  
   //Pagination
