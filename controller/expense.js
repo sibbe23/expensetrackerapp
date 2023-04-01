@@ -124,8 +124,9 @@ const deleteexpense = async(req,res)=>{
 const getAllExpenses = async (req, res, next) => {
     try {
       const str = req.query.page;
+      console.log(str)
       const page = str ? Number(str.split("=")[0]) : 1;
-      const ltd = str ? Number(str.split("=")[1]) : 10;
+      const ltd = str ? Number(str.split("=")[1]) : 1;
       let count = await Expense.count({ where: { userId: req.user.id } });
       const expenses = await Expense.findAll({
         where: { userId: req.user.id },
