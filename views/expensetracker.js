@@ -90,16 +90,11 @@ window.addEventListener('DOMContentLoaded',async()=>{
         showPremiumuserMessage()
         showLeaderboard()
     }
-    if(token){
    const response = await axios.get(`http://localhost:4000/expense/data?page=${page}=${ltd}`,{headers:{'Authorization':token}})
         console.log(response)
         response.data.expenses.forEach(response=>            addNewExpensetoUI(response)
         )
-            showPagination(response)}
-            else{
-                location.replace('../views/login.html')
-            }
-        })
+            showPagination(response)})
     
 
 function addNewExpensetoUI(expense){
@@ -240,33 +235,38 @@ function download(){
 const setRow = () => {
     let row = document.getElementById('rowOptions').value;
     localStorage.setItem("row", row);
-    window.location.reload()
   }
  
+  //Pagination
 const showPagination = async (response) => {
     const pagination = document.getElementById('paginations')
     pagination.innerHTML = "";
-    if (response.data.hasPreviousPage) {
+    if (response.data.hasPreviousPage) 
+    {
       const btn = document.createElement("button");
-      btn.className = "m-1"
+      btn.className = "btn btn-dark"
       btn.innerHTML = response.data.previousPage;
-      await btn.addEventListener("click", () => {
+      await btn.addEventListener("click", () =>
+       {
         getExpense(response.data.previousPage)
-      });
+       });
       pagination.appendChild(btn);
     }
     const btn1 = document.createElement("button");
-    btn1.className = "m-1"
+    btn1.className = "btn btn-success"
     btn1.innerHTML = `<h3>${response.data.currentPage}</h3>`;
-    await btn1.addEventListener("click", () => {
+    await btn1.addEventListener("click", () =>
+     {
       getExpense(response.data.currentPage)
-    });
+     });
     pagination.appendChild(btn1);
-    if (response.data.hasNextPage) {
+    if (response.data.hasNextPage)
+     {
       const btn2 = document.createElement("button");
-      btn2.className = "m-1"
+      btn2.className = "btn btn-dark"
       btn2.innerHTML = response.data.nextPage;
-      btn2.addEventListener("click", async () => {
+      btn2.addEventListener("click", async () => 
+      {
         await getExpense(response.data.nextPage);
       });
       pagination.appendChild(btn2);
