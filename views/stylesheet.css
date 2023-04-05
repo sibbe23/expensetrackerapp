@@ -102,8 +102,6 @@ form .txt_field{
     width: 50%;
     height: 25px;
     border:none;
-    margin-left: 95px;
-    margin-top: 25px;
     padding-bottom: 28px;
     background:none;
     border-radius: 25px;
@@ -112,6 +110,7 @@ form .txt_field{
     font-weight: 400;
     cursor: pointer;
     outline: none;
+    text-underline-position: below;
 }
 .fobtn:hover{
     color: #000;
