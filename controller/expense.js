@@ -135,12 +135,12 @@ const getAllExpenses = async (req, res, next) => {
       });
       return res.status(200).json({
         expenses,
-        hasNextPage: ltd * page < count,
         nextPage: page + 1,
-        hasPreviousPage: page > 1,
         previousPage: page - 1,
         lastPage: Math.ceil(count / ltd),
         currentPage: page,
+        hasPreviousPage: page > 1,
+        hasNextPage: ltd * page < count,
       });
     } catch (err) {
       console.log(err);
